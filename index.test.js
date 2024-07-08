@@ -1,5 +1,12 @@
 const {Room, Booking} = require('./index');
 
+const exampleRoom1 = new Room({
+    name: 'Suite K-107', 
+    bookings: [], 
+    rate: 40000, 
+    discount: 50
+})
+
 const r1Booking1 = new Booking({
     name: 'Kevin', 
     email: 'kevinagudomontil@gmail.com', 
@@ -8,6 +15,7 @@ const r1Booking1 = new Booking({
     discount: 10, 
     room: exampleRoom1
 })
+exampleRoom1.addBooking(r1Booking1)
 const r1Booking2 = new Booking({
     name: 'Aitana', 
     email: 'aitana@gmail.com', 
@@ -16,6 +24,7 @@ const r1Booking2 = new Booking({
     discount: 0, 
     room: exampleRoom1
 })
+exampleRoom1.addBooking(r1Booking2)
 const r1Booking3 = new Booking({
     name: 'Pablo', 
     email: 'pablo@gmail.com', 
@@ -24,13 +33,13 @@ const r1Booking3 = new Booking({
     discount: 20, 
     room: exampleRoom1
 })
+exampleRoom1.addBooking(r1Booking3)
 
-const r1Bookings = [r1Booking1, r1Booking2, r1Booking3]
-const exampleRoom1 = new Room({
-    name: 'Suite K-107', 
-    bookings: r1Bookings, 
-    rate: 40000, 
-    discount: 50
+const exampleRoom2 = new Room({
+    name: 'Double Y-107', 
+    bookings: [], 
+    rate: 20000, 
+    discount: 20
 })
 
 const r2Booking1 = new Booking({
@@ -41,6 +50,7 @@ const r2Booking1 = new Booking({
     discount: 10, 
     room: exampleRoom2
 })
+exampleRoom2.addBooking(r2Booking1)
 const r2Booking2 = new Booking({
     name: 'Aitana', 
     email: 'aitana@gmail.com', 
@@ -49,6 +59,7 @@ const r2Booking2 = new Booking({
     discount: 0, 
     room: exampleRoom2
 })
+exampleRoom2.addBooking(r2Booking2)
 const r2Booking3 = new Booking({
     name: 'Pablo', 
     email: 'pablo@gmail.com', 
@@ -57,14 +68,7 @@ const r2Booking3 = new Booking({
     discount: 20, 
     room: exampleRoom2
 })
-
-const r2Bookings = [r2Booking1, r2Booking2, r2Booking3]
-const exampleRoom2 = new Room({
-    name: 'Double Y-107', 
-    bookings: r2Bookings, 
-    rate: 20000, 
-    discount: 20
-})
+exampleRoom2.addBooking(r2Booking3)
 
 
 test('should check that room 1 is occupied on the date 2024-06-08', () => {
