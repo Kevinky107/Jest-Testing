@@ -11,7 +11,14 @@ class Room {
     }
 
     isOccupied = (date) => {
-
+        let isOccupied = false
+        this._bookings.forEach(booking => {
+            if(booking._checkin <= date && date < booking._checkout) {
+                isOccupied = true;
+                return
+            }
+        })
+        return isOccupied
     }
 
     occupancyPercetage = (startDate, endDate) => {

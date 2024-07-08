@@ -16,6 +16,7 @@ const r1Booking1 = new Booking({
     room: exampleRoom1
 })
 exampleRoom1.addBooking(r1Booking1)
+
 const r1Booking2 = new Booking({
     name: 'Aitana', 
     email: 'aitana@gmail.com', 
@@ -25,6 +26,7 @@ const r1Booking2 = new Booking({
     room: exampleRoom1
 })
 exampleRoom1.addBooking(r1Booking2)
+
 const r1Booking3 = new Booking({
     name: 'Pablo', 
     email: 'pablo@gmail.com', 
@@ -51,6 +53,7 @@ const r2Booking1 = new Booking({
     room: exampleRoom2
 })
 exampleRoom2.addBooking(r2Booking1)
+
 const r2Booking2 = new Booking({
     name: 'Aitana', 
     email: 'aitana@gmail.com', 
@@ -60,6 +63,7 @@ const r2Booking2 = new Booking({
     room: exampleRoom2
 })
 exampleRoom2.addBooking(r2Booking2)
+
 const r2Booking3 = new Booking({
     name: 'Pablo', 
     email: 'pablo@gmail.com', 
@@ -93,17 +97,17 @@ test('should check that room 1 is not occupied on the date 2024-06-12', () => {
 
 test('should return that room 1 has 50% of occupancy between 2024-06-04 and 2024-06-08', () => {
     const room = {...exampleRoom1}
-    expect(room.isOccupied('2024-06-04','2024-06-08')).toBe(50);
+    expect(room.occupancyPercetage('2024-06-04','2024-06-08')).toBe(50);
 })
 
 test('should return that room 1 has 0% of occupancy between 2024-06-13 and 2024-06-20', () => {
     const room = {...exampleRoom1}
-    expect(room.isOccupied('2024-06-04','2024-06-08')).toBe(50);
+    expect(room.occupancyPercetage('2024-06-04','2024-06-08')).toBe(50);
 })
 
 test('should return that room 1 has 100% of occupancy between 2024-06-10 and 2024-06-11', () => {
     const room = {...exampleRoom1}
-    expect(room.isOccupied('2024-06-10','2024-06-11')).toBe(50);
+    expect(oom.occupancyPercetage('2024-06-10','2024-06-11')).toBe(50);
 })
 
 test('should return that with both rooms the occupancy is 0% between 2024-06-13 and 2024-06-20', () => {
