@@ -138,7 +138,7 @@ test('should return both rooms between 2024-06-13 and 2024-06-20', () => {
 
 test('should return and empty array between 2024-06-10 and 2024-06-11', () => {
     const rooms = [{...exampleRoom1}, {...exampleRoom2}]
-    expect(Room.availableRooms(rooms, '2024-06-10','2024-06-11')).toEqual([{...exampleRoom1}, {...exampleRoom2}]);
+    expect(Room.availableRooms(rooms, '2024-06-10','2024-06-11')).toEqual([]);
 })
 
 test('should return an array with only exampleRoom1 between 2024-06-12 and 2024-06-14', () => {

@@ -40,11 +40,22 @@ class Room {
     }
 
     static totalOccupancyPercetage = (rooms, startDate, endDate) => {
+        let percentage = 0;
+        rooms.forEach(room => {
+            percentage += room.occupancyPercetage(startDate, endDate)
+        })
 
+        return percentage/rooms.length
     }
 
     static availableRooms = (rooms, startDate, endDate) => {
+        let roomArray = []
+        rooms.forEach(room => {
+            if(room.occupancyPercetage(startDate, endDate) === 0)
+                roomArray.push(room)
+        })
 
+        return roomArray
     }
 
 }
@@ -60,7 +71,11 @@ class Booking {
     }
 
     getFee = () => {
-
+        const start = Date.parse(this._checkin)
+        const end = Date.parse(this._checkout)
+        const nights = ( end - start ) / 86400000
+        const roomPrice = (this._room._rate * nights) - ((this._room._rate * nights)*this._room._discount/100)
+        return roomPrice - (roomPrice*(this._discount/100))
     }
 
 }
