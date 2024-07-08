@@ -16,7 +16,6 @@ const r1Booking1 = new Booking({
     room: exampleRoom1
 })
 exampleRoom1.addBooking(r1Booking1)
-
 const r1Booking2 = new Booking({
     name: 'Aitana', 
     email: 'aitana@gmail.com', 
@@ -26,7 +25,6 @@ const r1Booking2 = new Booking({
     room: exampleRoom1
 })
 exampleRoom1.addBooking(r1Booking2)
-
 const r1Booking3 = new Booking({
     name: 'Pablo', 
     email: 'pablo@gmail.com', 
@@ -53,7 +51,6 @@ const r2Booking1 = new Booking({
     room: exampleRoom2
 })
 exampleRoom2.addBooking(r2Booking1)
-
 const r2Booking2 = new Booking({
     name: 'Aitana', 
     email: 'aitana@gmail.com', 
@@ -63,7 +60,6 @@ const r2Booking2 = new Booking({
     room: exampleRoom2
 })
 exampleRoom2.addBooking(r2Booking2)
-
 const r2Booking3 = new Booking({
     name: 'Pablo', 
     email: 'pablo@gmail.com', 
@@ -80,9 +76,14 @@ test('should check that room 1 is occupied on the date 2024-06-08', () => {
     expect(room.isOccupied('2024-06-08')).toBe(true);
 })
 
-test('should check that room 1 is occupied on the date 2024-06-12', () => {
+test('should check that room 1 is not occupied on the date 2024-06-12', () => {
     const room = {...exampleRoom1}
-    expect(room.isOccupied('2024-06-08')).toBe(true);
+    expect(room.isOccupied('2024-06-12')).toBe(false);
+})
+
+test('should check that room 1 is not occupied on the date 2024-06-09', () => {
+    const room = {...exampleRoom1}
+    expect(room.isOccupied('2024-06-09')).toBe(false);
 })
 
 test('should check that room 1 is not occupied on the date 2024-06-07', () => {
@@ -95,54 +96,54 @@ test('should check that room 1 is not occupied on the date 2024-06-12', () => {
     expect(room.isOccupied('2024-06-12')).toBe(false);
 })
 
-test('should return that room 1 has 50% of occupancy between 2024-06-04 and 2024-06-08', () => {
+test('should return that room 1 has 50% of occupancy between 2024-06-08 and 2024-06-09', () => {
     const room = {...exampleRoom1}
-    expect(room.occupancyPercetage('2024-06-04','2024-06-08')).toBe(50);
+    expect(room.occupancyPercetage('2024-06-08','2024-06-09')).toBe(50);
 })
 
 test('should return that room 1 has 0% of occupancy between 2024-06-13 and 2024-06-20', () => {
     const room = {...exampleRoom1}
-    expect(room.occupancyPercetage('2024-06-04','2024-06-08')).toBe(50);
+    expect(room.occupancyPercetage('2024-06-02','2024-06-04')).toBe(0);
 })
 
 test('should return that room 1 has 100% of occupancy between 2024-06-10 and 2024-06-11', () => {
     const room = {...exampleRoom1}
-    expect(oom.occupancyPercetage('2024-06-10','2024-06-11')).toBe(50);
+    expect(room.occupancyPercetage('2024-06-10','2024-06-11')).toBe(100);
 })
 
 test('should return that with both rooms the occupancy is 0% between 2024-06-13 and 2024-06-20', () => {
-    const rooms = [...exampleRoom1, ...exampleRoom2]
+    const rooms = [{...exampleRoom1}, {...exampleRoom2}]
     expect(Room.totalOccupancyPercetage(rooms, '2024-06-13','2024-06-20')).toBe(0);
 })
 
 test('should return that with both rooms the occupancy is 0% between 2024-06-13 and 2024-06-20', () => {
-    const rooms = [...exampleRoom1, ...exampleRoom2]
+    const rooms = [{...exampleRoom1}, {...exampleRoom2}]
     expect(Room.totalOccupancyPercetage(rooms, '2024-06-13','2024-06-20')).toBe(0);
 })
 
 test('should return that with both rooms the occupancy is 100% between 2024-06-10 and 2024-06-11', () => {
-    const rooms = [...exampleRoom1, ...exampleRoom2]
+    const rooms = [{...exampleRoom1}, {...exampleRoom2}]
     expect(Room.totalOccupancyPercetage(rooms, '2024-06-10','2024-06-11')).toBe(100);
 })
 
 test('should return that with both rooms the occupancy is 50% between 2024-06-05 and 2024-06-06', () => {
-    const rooms = [...exampleRoom1, ...exampleRoom2]
+    const rooms = [{...exampleRoom1}, {...exampleRoom2}]
     expect(Room.totalOccupancyPercetage(rooms, '2024-06-05','2024-06-06')).toBe(50);
 })
 
 test('should return both rooms between 2024-06-13 and 2024-06-20', () => {
-    const rooms = [...exampleRoom1, ...exampleRoom2]
-    expect(Room.availableRooms(rooms, '2024-06-13','2024-06-20')).toEqual([...exampleRoom1, ...exampleRoom2]);
+    const rooms = [{...exampleRoom1}, {...exampleRoom2}]
+    expect(Room.availableRooms(rooms, '2024-06-13','2024-06-20')).toEqual([{...exampleRoom1}, {...exampleRoom2}]);
 })
 
 test('should return and empty array between 2024-06-10 and 2024-06-11', () => {
-    const rooms = [...exampleRoom1, ...exampleRoom2]
-    expect(Room.availableRooms(rooms, '2024-06-10','2024-06-11')).toEqual([...exampleRoom1, ...exampleRoom2]);
+    const rooms = [{...exampleRoom1}, {...exampleRoom2}]
+    expect(Room.availableRooms(rooms, '2024-06-10','2024-06-11')).toEqual([{...exampleRoom1}, {...exampleRoom2}]);
 })
 
 test('should return an array with only exampleRoom1 between 2024-06-12 and 2024-06-14', () => {
-    const rooms = [...exampleRoom1, ...exampleRoom2]
-    expect(Room.availableRooms(rooms, '2024-06-12','2024-06-14')).toEqual([...exampleRoom1]);
+    const rooms = [{...exampleRoom1}, {...exampleRoom2}]
+    expect(Room.availableRooms(rooms, '2024-06-12','2024-06-14')).toEqual([{...exampleRoom1}]);
 })
 
 test('should return 18000 as total fee for the r1Booking1', () => {
