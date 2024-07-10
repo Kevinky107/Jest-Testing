@@ -36,7 +36,7 @@ class Room {
             if(this.isOccupied(`${year}-${month}-${day}`))
                 occupiedDays++
         }
-        return (occupiedDays/days)*100
+        return Math.round((occupiedDays/days)*100)
     }
 
     static totalOccupancyPercetage = (rooms, startDate, endDate) => {
@@ -45,7 +45,7 @@ class Room {
             percentage += room.occupancyPercetage(startDate, endDate)
         })
 
-        return percentage/rooms.length
+        return Math.round(percentage/rooms.length)
     }
 
     static availableRooms = (rooms, startDate, endDate) => {
@@ -75,7 +75,7 @@ class Booking {
         const end = Date.parse(this._checkout)
         const nights = ( end - start ) / 86400000
         const roomPrice = (this._room._rate * nights) - ((this._room._rate * nights)*this._room._discount/100)
-        return roomPrice - (roomPrice*(this._discount/100))
+        return Math.round(roomPrice - (roomPrice*(this._discount/100)))
     }
 
 }
