@@ -1,10 +1,17 @@
+interface RoomInput {
+    name: string
+    bookings: Booking[]
+    rate: number
+    discount: number
+}
+
 class Room {
     _name: string
     _bookings: Booking[]
     _rate: number
     _discount: number
 
-    constructor({name, bookings, rate, discount}){
+    constructor({name, bookings, rate, discount}: RoomInput){
         this._name = name
         this._bookings = bookings
         this._rate = rate
@@ -65,6 +72,15 @@ class Room {
 
 }
 
+interface BookingInput {
+    name: string
+    email: string
+    checkin: string
+    checkout: string
+    discount: number
+    room: Room
+}
+
 class Booking {
     _name: string
     _email: string
@@ -73,7 +89,7 @@ class Booking {
     _discount: number
     _room: Room
 
-    constructor({name, email, checkin, checkout, discount, room}){
+    constructor({name, email, checkin, checkout, discount, room}: BookingInput){
         this._name = name
         this._email = email
         this._checkin = checkin
