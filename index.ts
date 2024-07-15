@@ -1,6 +1,6 @@
 class Room {
     _name: string
-    _bookings: Array<Booking>
+    _bookings: Booking[]
     _rate: number
     _discount: number
 
@@ -44,7 +44,7 @@ class Room {
         return Math.round((occupiedDays/days)*100)
     }
 
-    static totalOccupancyPercetage = (rooms: Array<Room>, startDate: string, endDate: string): number => {
+    static totalOccupancyPercetage = (rooms: Room[], startDate: string, endDate: string): number => {
         let percentage: number = 0;
         rooms.forEach(room => {
             percentage += room.occupancyPercetage(startDate, endDate)
@@ -53,8 +53,8 @@ class Room {
         return Math.round(percentage/rooms.length)
     }
 
-    static availableRooms = (rooms: Array<Room>, startDate: string, endDate: string): Array<Room> => {
-        let roomArray: Array<Room> = []
+    static availableRooms = (rooms: Room[], startDate: string, endDate: string): Room[] => {
+        let roomArray: Room[] = []
         rooms.forEach(room => {
             if(room.occupancyPercetage(startDate, endDate) === 0)
                 roomArray.push(room)
