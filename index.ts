@@ -1,4 +1,9 @@
 class Room {
+    _name: string
+    _bookings: Array<Booking>
+    _rate: number
+    _discount: number
+
     constructor({name, bookings, rate, discount}){
         this._name = name
         this._bookings = bookings
@@ -6,12 +11,12 @@ class Room {
         this._discount = discount
     }
 
-    addBooking = (booking) => {
+    addBooking = (booking: Booking) => {
         this._bookings.push(booking)
     }
 
-    isOccupied = (date) => {
-        let isOccupied = false
+    isOccupied = (date: string): boolean => {
+        let isOccupied: boolean = false
         this._bookings.forEach(booking => {
             if(booking._checkin <= date && date < booking._checkout) {
                 isOccupied = true;
@@ -21,26 +26,26 @@ class Room {
         return isOccupied
     }
 
-    occupancyPercetage = (startDate, endDate) => {
-        const start = Date.parse(startDate)
-        const end = Date.parse(endDate)
-        let days = 0;
-        let occupiedDays = 0;
+    occupancyPercetage = (startDate: string, endDate: string): number => {
+        const start: number = Date.parse(startDate)
+        const end: number = Date.parse(endDate)
+        let days: number = 0;
+        let occupiedDays: number = 0;
         for(let i = start; i <= end; i+=86400000)
         {
             days++
             const date = new Date(i)
-            let year = date.getFullYear();
-            let month = (date.getMonth() + 1).toString().padStart(2, '0');
-            let day = date.getDate().toString().padStart(2, '0');
+            let year: number = date.getFullYear();
+            let month: string = (date.getMonth() + 1).toString().padStart(2, '0');
+            let day: string = date.getDate().toString().padStart(2, '0');
             if(this.isOccupied(`${year}-${month}-${day}`))
                 occupiedDays++
         }
         return Math.round((occupiedDays/days)*100)
     }
 
-    static totalOccupancyPercetage = (rooms, startDate, endDate) => {
-        let percentage = 0;
+    static totalOccupancyPercetage = (rooms: Array<Room>, startDate: string, endDate: string): number => {
+        let percentage: number = 0;
         rooms.forEach(room => {
             percentage += room.occupancyPercetage(startDate, endDate)
         })
@@ -48,8 +53,8 @@ class Room {
         return Math.round(percentage/rooms.length)
     }
 
-    static availableRooms = (rooms, startDate, endDate) => {
-        let roomArray = []
+    static availableRooms = (rooms: Array<Room>, startDate: string, endDate: string): Array<Room> => {
+        let roomArray: Array<Room> = []
         rooms.forEach(room => {
             if(room.occupancyPercetage(startDate, endDate) === 0)
                 roomArray.push(room)
@@ -61,6 +66,13 @@ class Room {
 }
 
 class Booking {
+    _name: string
+    _email: string
+    _checkin: string
+    _checkout: string
+    _discount: number
+    _room: Room
+
     constructor({name, email, checkin, checkout, discount, room}){
         this._name = name
         this._email = email
@@ -70,11 +82,11 @@ class Booking {
         this._room = room
     }
 
-    getFee = () => {
-        const start = Date.parse(this._checkin)
-        const end = Date.parse(this._checkout)
-        const nights = ( end - start ) / 86400000
-        const roomPrice = (this._room._rate * nights) - ((this._room._rate * nights)*this._room._discount/100)
+    getFee = (): number => {
+        const start: number = Date.parse(this._checkin)
+        const end: number = Date.parse(this._checkout)
+        const nights: number = ( end - start ) / 86400000
+        const roomPrice: number = (this._room._rate * nights) - ((this._room._rate * nights)*this._room._discount/100)
         return Math.round(roomPrice - (roomPrice*(this._discount/100)))
     }
 
